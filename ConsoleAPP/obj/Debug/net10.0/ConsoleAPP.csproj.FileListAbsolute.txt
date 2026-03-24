@@ -1,0 +1,14 @@
+C:\Dev\Repo\csBasics\ConsoleAPP\bin\Debug\net10.0\ConsoleAPP.exe
+C:\Dev\Repo\csBasics\ConsoleAPP\bin\Debug\net10.0\ConsoleAPP.deps.json
+C:\Dev\Repo\csBasics\ConsoleAPP\bin\Debug\net10.0\ConsoleAPP.runtimeconfig.json
+C:\Dev\Repo\csBasics\ConsoleAPP\bin\Debug\net10.0\ConsoleAPP.dll
+C:\Dev\Repo\csBasics\ConsoleAPP\bin\Debug\net10.0\ConsoleAPP.pdb
+C:\Dev\Repo\csBasics\ConsoleAPP\obj\Debug\net10.0\ConsoleAPP.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\Repo\csBasics\ConsoleAPP\obj\Debug\net10.0\ConsoleAPP.AssemblyInfoInputs.cache
+C:\Dev\Repo\csBasics\ConsoleAPP\obj\Debug\net10.0\ConsoleAPP.AssemblyInfo.cs
+C:\Dev\Repo\csBasics\ConsoleAPP\obj\Debug\net10.0\ConsoleAPP.csproj.CoreCompileInputs.cache
+C:\Dev\Repo\csBasics\ConsoleAPP\obj\Debug\net10.0\ConsoleAPP.dll
+C:\Dev\Repo\csBasics\ConsoleAPP\obj\Debug\net10.0\refint\ConsoleAPP.dll
+C:\Dev\Repo\csBasics\ConsoleAPP\obj\Debug\net10.0\ConsoleAPP.pdb
+C:\Dev\Repo\csBasics\ConsoleAPP\obj\Debug\net10.0\ConsoleAPP.genruntimeconfig.cache
+C:\Dev\Repo\csBasics\ConsoleAPP\obj\Debug\net10.0\ref\ConsoleAPP.dll

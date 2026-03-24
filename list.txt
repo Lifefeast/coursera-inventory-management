@@ -1,0 +1,1153 @@
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+
+
+
+/*using System;
+using System.ComponentModel;
+
+//Inventory
+public class InventoryManager
+/* Inventory management system
+
+To complete this challenge, you will need to create a console application where users can manage product stock. Users should be able to add new products, update stock, and remove products.
+
+Some key features include:
+
+Add new products with name, price, and stock quantity.
+
+Update stock when products are sold or restocked.
+
+View all products and their stock levels.
+
+Remove products from inventory.
+ 
+
+{
+    static List<string> itemName = new List<string>();
+    static List<double> itemQuantity = new List<doublel>();
+    static List<double> itemPrice = new List<double>();
+
+    static void Main(string[] args)
+    {
+        while (true){
+            Console.WriteLine("Inventory Manager");
+        Console.WriteLine("1. Add item");
+        Console.WriteLine("2. Update existing item");
+        Console.WriteLine("3. View all items");
+        Console.WriteLine("4. Exit"); 
+        
+        ?string choice = Console.ReadLine();
+
+        switch(choice)
+        {case "1":
+        AddItem();
+        break;
+        case "2":
+        UpdateItem();
+        break;
+        case "3":
+        ViewItem();
+        break;
+        case "4":
+        Environment.Exit(0);
+        default:
+        Console.WriteLine("Invalid Choice");
+        break;}
+        }
+    }
+    static void AddItem()
+    {
+        Console.WriteLine("Enter your Item name");
+        string productName = Console.ReadLine(); //Creating the variable that will hold the name
+        itemName.Add(productName);
+    }
+}
+*/
+
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+TaskManager with <list>
+
+using System;
+using System.ComponentModel;
+
+public class TaskManager
+{
+    static List<string> tasks = new List<string>();
+    static List<bool> taskStatus = new List<bool>();
+
+    static void Main(string[] args)
+    {
+        while (true)
+        {
+            Console.WriteLine("Task Manager");
+            Console.WriteLine("1. Add Task");
+            Console.WriteLine("2. Mark Task as completed");
+            Console.WriteLine("3. View Tasks");
+            Console.WriteLine("4. Exit");
+
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    AddTask();
+                    break;
+                case "2":
+                    CompleteTask();
+                    break;
+                case "3":
+                    ViewTask();
+                    break;
+                case "4":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Invalid Choice");
+                    break;
+            }
+        }
+    }
+
+    static void AddTask()
+    {
+        Console.WriteLine("Enter Task Description: ");
+        string task = Console.ReadLine();
+        tasks.Add(task);
+        taskStatus.Add(false);
+        Console.WriteLine("Task Added Sucessfully!");
+    }
+
+    static void CompleteTask()
+    {
+        if (tasks.Count == 0)
+        {
+            Console.WriteLine("No tasks available to complete.");
+            return;
+        }
+        Console.WriteLine("Enter task number to mark as completed: ");
+        if (
+            int.TryParse(Console.ReadLine(), out int taskNumber)
+            && taskNumber > 0
+            && taskNumber <= tasks.Count
+        )
+        {
+            taskStatus[taskNumber - 1] = true;
+            Console.WriteLine($"Task '{tasks[taskNumber - 1]}' marked as completed");
+        }
+        else
+        {
+            Console.WriteLine("Invalid Task Number");
+        }
+    }
+
+    static void ViewTask()
+    {
+        if (tasks.Count == 0)
+        {
+            Console.WriteLine("No tasks available.");
+            return;
+        }
+        Console.WriteLine("Tasks:");
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            string status = taskStatus[i] ? "Completed" : "Pending";
+            Console.WriteLine($"{i + 1}. {tasks[i]} - {status}");
+        }
+    }
+}
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+task list (3 tasks) using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+
+public class TaskManager
+{
+    public static string task1 = "";
+    public static string task2 = "";
+    public static string task3 = "";
+    public static bool taskIsCompleted1 = false;
+    public static bool taskIsCompleted2 = false;
+    public static bool taskIsCompleted3 = false;
+
+    public static void Main()
+    {
+        Console.WriteLine(
+            "Select option, (1)=Add tasks, (2)=Mark as completed, (3)= View list, (4)=Quit "
+        );
+        string option = Console.ReadLine();
+        while (option != "4")
+        {
+            if (option == "1")
+                addTask();
+            else if (option == "2")
+                markAsCompleted();
+            else if (option == "3")
+                viewTasks();
+
+            Console.WriteLine(
+                "Select option, (1)=Add tasks, (2)=Mark as completed, (3)= View list, (4)=Quit "
+            );
+            option = Console.ReadLine();
+        }
+    }
+
+    public static void addTask()
+    {
+        Console.WriteLine("Describe your task: ");
+        string newTask = (Console.ReadLine());
+        if (string.IsNullOrEmpty(task1))
+        {
+            task1 = newTask;
+        }
+        else if (string.IsNullOrEmpty(task2))
+        {
+            task2 = newTask;
+        }
+        else if (string.IsNullOrEmpty(task3))
+        {
+            task3 = newTask;
+        }
+        else
+        {
+            Console.WriteLine("Task list is full");
+        }
+    }
+
+    public static void markAsCompleted()
+    {
+        Console.WriteLine("Which tasks would you like to mark as completed: ");
+        int taskToComplete = int.Parse(Console.ReadLine());
+        if (taskToComplete == 1 && !string.IsNullOrEmpty(task1))
+        {
+            taskIsCompleted1 = true;
+            Console.WriteLine("Task 1 is marked as complete;");
+        }
+        else if (taskToComplete == 2 && !string.IsNullOrEmpty(task2))
+        {
+            taskIsCompleted2 = true;
+            Console.WriteLine("Task 2 is marked as complete");
+        }
+        else if (taskToComplete == 3 && !string.IsNullOrEmpty(task3))
+        {
+            taskIsCompleted3 = true;
+            Console.WriteLine("Task 3 is marked as complete");
+        }
+        else
+        {
+            Console.WriteLine("Invalid task selection");
+        }
+    }
+
+    public static void viewTasks()
+    {
+        Console.WriteLine("Your tasks");
+        if (!string.IsNullOrEmpty(task1))
+        {
+            Console.WriteLine(
+                taskIsCompleted1
+                    ? "Task 1: " + task1 + "[Completed]"
+                    : "Task 1: " + task1 + "[Pending]"
+            );
+        }
+        if (!string.IsNullOrEmpty(task2))
+        {
+            Console.WriteLine(
+                taskIsCompleted2
+                    ? "Task 2: " + task2 + "[Completed]"
+                    : "Task 2: " + task2 + "[Pending]"
+            );
+        }
+        if (!string.IsNullOrEmpty(task3))
+        {
+            Console.WriteLine(
+                taskIsCompleted3
+                    ? "Task 3: " + task3 + "[Completed]"
+                    : "Task 3: " + task3 + "[Pending]"
+            );
+        }
+    }
+}
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+using System;
+
+class Student
+{
+    public string CalculatePassFail(int studentScore)
+    {
+        if (studentScore >= 60)
+            return "Pass";
+        else
+            return "Fail";
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        if (args.Length > 0)
+            Console.WriteLine("Hello, " + args[0] + "!");
+        else
+            Console.WriteLine("Hello, world!");
+
+        Console.WriteLine("Enter your score: ");
+        int score = int.Parse(Console.ReadLine());
+        Student student = new Student();
+        string result = student.CalculatePassFail(score);
+        Console.WriteLine("You " + result);
+    }
+}
+
+
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+
+class Program
+{
+    static double CalculateArea(double length, double width, double height)
+    {
+        return length * width * height;
+    }
+
+    static double[] ReadThreeNumbers()
+    {
+        Console.WriteLine("Enter length: ");
+        double length = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Enter width: ");
+        double width = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Enter heigth: ");
+        double height = Convert.ToDouble(Console.ReadLine());
+
+        return new double[] { length, width, height };
+    }
+
+    static void Main()
+    {
+        double[] numbers = ReadThreeNumbers();
+
+        double areaVolume = CalculateArea(numbers[0], numbers[1], numbers[2]);
+
+        Console.WriteLine("The volume is: " + areaVolume + "!");
+    }
+}
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+
+// calculate 3 numbers + average //
+class Program
+{
+    static double calculateAverage(double num1, double num2, double num3)
+    {
+        double average = (num1 + num2 + num3) / 3;
+        return average;
+    }
+
+    static double[] ReadThreeNumbers()
+    {
+        Console.WriteLine("Enter first number");
+        double num1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Enter second number");
+        double num2 = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Enter third number");
+        double num3 = Convert.ToDouble(Console.ReadLine());
+
+        return new double[] { num1, num2, num3 };
+    }
+
+    static void Main()
+    {
+        double[] numbers = ReadThreeNumbers();
+
+        double averageNum = calculateAverage(numbers[0], numbers[1], numbers[2]);
+
+        Console.WriteLine("Your average is " + averageNum + "!");
+    }
+}
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+
+
+    public double CalculatePrice(string material, string size, bool engraving)
+    {
+        double basePrice = 50.00;
+        double materialCost = 0.00;
+        double sizeCost = 0.00;
+        double engravingCost = 0.00;
+        switch (size.ToLower())
+        {
+            case "small":
+                sizeCost = 1.00;
+                break;
+            case "medium":
+                sizeCost = 3.00;
+                break;
+            default:
+                sizeCost = 10.00;
+                break;
+        }
+        switch (material.ToLower())
+        {
+            case "gold":
+                materialCost = 100.00;
+                break;
+            case "silver":
+                materialCost = 50.00;
+                break;
+            case "bronze":
+                materialCost = 20.00;
+                break;
+            default:
+                materialCost = 10.00; //default for other materials
+                break;
+        }
+        if (engraving)
+        {
+            engravingCost = 25.00;
+        }
+        double finalPrice = basePrice + materialCost + sizeCost + engravingCost;
+        return finalPrice;
+    }
+
+    static void Main()
+    {
+        Program program = new Program();
+        double price = program.CalculatePrice("gold", "medium", true);
+        Console.WriteLine(price);
+    }
+}
+
+
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+Method CalculateDiscount 
+
+class Program
+{
+    public static double CalculateDiscount(double originalPrice, double discountRate)
+    {
+        double origPrice = originalPrice;
+        double discRate = discountRate;
+        return origPrice * discRate;
+    }
+
+    static void Main()
+    {
+        double origPrice,
+            discRate;
+        Console.WriteLine("Enter the original price : ");
+        origPrice = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("Enter the discount rate: ");
+        discRate = Convert.ToDouble(Console.ReadLine());
+        double discount = CalculateDiscount(origPrice, discRate);
+        Console.WriteLine("Discount ammount: " + discount);
+    }
+}
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+do while (repeat while input is uneven)
+       do
+        {
+            Console.WriteLine("Enter your number");
+            int input = 0;
+            input = int.Parse(Console.ReadLine());
+
+            if (input >= 1 && input <= 10 && input % 2 == 0)
+            {
+                Console.WriteLine(input + " is valid");
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Input is invalid");
+            }
+        } while (true);
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+
+ switch case with case n when (n ><= 0)
+
+   int[] grades = { 95, 82, 75, 63, 58 };
+        for (int i = 0; i < grades.Length; i++)
+        {
+            int grade = grades[i];
+            switch (grade)
+            {
+                case int n when (n >= 90):
+                    Console.WriteLine("Grade A: Excellent");
+                    break;
+                case int n when (n >= 80):
+                    Console.WriteLine("Grade B: Good job");
+                    break;
+                case int n when (n >= 70):
+                    Console.WriteLine("Grade C: Fair");
+                    break;
+                case int n when (n >= 60):
+                    Console.WriteLine("Grace D: Needs improvement");
+                    break;
+                default:
+                    Console.WriteLine("Fail");
+                    break;
+            }
+        }
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+for/ switch statement
+   string[] weekDays = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+
+        for (int i = 0; i < weekDays.Length; i++)
+        {
+            switch (weekDays[i])
+            {
+                case "Monday":
+                    Console.WriteLine("Team Meeting");
+                    break;
+                case "Tuesday":
+                    Console.WriteLine("Code Review");
+                    break;
+                case "Wednesday":
+                    Console.WriteLine("Development");
+                    break;
+                case "Thursday":
+                    Console.WriteLine("Testing");
+                    break;
+                case "Friday":
+                    Console.WriteLine("Deployment");
+                    break;
+            }
+        }
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+for || if/else
+
+        int[] studentScores = { 45, 60, 72, 38, 55 };
+        for (int i = 0; i < studentScores.Length; i++)
+        {
+            if (studentScores[i] >= 50)
+            {
+                Console.WriteLine("Number :" + studentScores[i] + " is passing");
+            }
+            else
+            {
+                Console.WriteLine("Number: " + studentScores[i] + " is fail");
+            }
+        }
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+factorial and stuff
+
+   // Declare the number
+        int number = 5;
+
+        // Variable to store the factorial
+        int factorial = 1;
+
+        // While loop to calculate factorial
+        while (number > 0)
+        {
+            Console.WriteLine("factorial " + factorial + " * " + number);
+            factorial *= number; // Multiply factorial by current number
+            number--; // Decrement the number
+        }
+
+        // Print the result
+        Console.WriteLine("Factorial: " + factorial);
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+Array prices gets a +5% increase and gets printed in order
+{
+        double[] prices = { 10.00, 15.50, 8.25, 22.00 };
+        for (int i = 0; i < prices.Length; i++)
+        {
+            prices[i] = prices[i] * 1.05;
+            Console.WriteLine("New price for product " + i + ": " + prices[i]);
+        }
+    }
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+//For loop with Switch control structure//
+string[] weatherForecasts =
+        {
+            "Sunny and Warm",
+            "rainy with thunderstorms",
+            "Cloudy and cold",
+        };
+        for (int i = 0; i < weatherForecasts.Length; i++)
+        {
+            switch (weatherForecasts[i])
+            {
+                case "Sunny and Warm":
+                    Console.WriteLine(
+                        "Today will be " + weatherForecasts[i] + " so bring your sunglases"
+                    );
+                    break;
+                case "rainy with thunderstorms":
+                    Console.WriteLine(
+                        "Today will be " + weatherForecasts[i] + " so bring your umbrella"
+                    );
+                    break;
+                case "Cloudy and cold":
+                    Console.WriteLine(
+                        "Today will be " + weatherForecasts[i] + "so wear warm clothes"
+                    );
+                    break;
+            }
+        }
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+int array (for loop)
+int[] numbers = { 1, 2, 3, 4, 5 };
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            if (numbers[i] % 2 == 0)
+            {
+                Console.WriteLine(numbers[i] + " is even.");
+            }
+            else
+            {
+                Console.WriteLine(numbers[i] + " is odd.");
+            }
+        }
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+//Do-while loop 
+ {
+        int counter = 0;
+        do
+        {
+            Console.WriteLine(counter);
+            counter++;
+        } while (counter < 10);
+    }
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+
+
+ //Loop until "exit" is written down //
+{
+        string input = "";
+        while (input != "exit")
+        {
+            Console.WriteLine("enter a command:");
+            input = Console.ReadLine();
+        }
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+
+
+
+using System;
+using System.Runtime.CompilerServices;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter your age please: ");
+        int age = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Would you like Premium Membership? ");
+        bool wantsMembership = Helper.GetYesOrNo(); // needs helper.cs look below
+
+        /*
+                public static bool GetYesOrNo()
+            {
+                {
+                    string input = Console.ReadLine().Trim().ToLower();
+        
+                    if (input == "yes")
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            */
+
+        // if (age <= 18)
+        // {
+        //     if (WantsMemberShip)
+        //         Console.WriteLine("Membership included, That will be 25£");
+        //     else
+        //         Console.WriteLine("No membership included, That will be 15£");
+        // }
+        // else if (age >= 19 && age <= 60)
+        // {
+        //     if (WantsMemberShip)
+        //         Console.WriteLine("Membership included, That will be 50£");
+        //     else
+        //         Console.WriteLine("No membership included, That will be 15£");
+        // }
+        // else if (age > 60)
+        // {
+        //     if (WantsMemberShip)
+        //         Console.WriteLine("Membership included, That will be 35£");
+        //     else
+        //         Console.WriteLine("No membership included, that will be 20£");
+        // }
+
+        int[] membershipCost = [];
+
+        if (age <= 18)
+            membershipCost = [15, 25];
+        else if (age >= 19 && age <= 60)
+            membershipCost = [15, 50];
+        else
+            membershipCost = [20, 25];
+
+        string startText = wantsMembership ? "Membership" : "No membership";
+        int cost = membershipCost[wantsMembership ? 1 : 0];
+
+        Console.WriteLine($"{startText} included, that will be £{cost}");
+    }
+}
+
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+// For , loop that repeats set amount of times (for (int i = 0; i < numbers.Length; i++))
+using System;
+using System.Runtime.CompilerServices;
+
+class Program
+{
+    static void Main()
+    {
+        int[] numbers = { 1, 2, 3, 4, 5 };
+        int sum = 0;
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            sum += numbers[i];
+            Console.WriteLine(sum);
+        }
+    }
+}
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+
+using System;
+using System.Runtime.CompilerServices;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter your age please: ");
+        int age = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Would you like Premium Membership? ");
+        bool WantsMemberShip = Helper.GetYesOrNo(); // needs helper.cs look below
+
+        /*
+                public static bool GetYesOrNo()
+            {
+                {
+                    string input = Console.ReadLine().Trim().ToLower();
+        
+                    if (input == "yes")
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            */
+
+        if (age <= 18)
+        {
+            if (WantsMemberShip)
+                Console.WriteLine("Membership included, That will be 25£");
+            else
+                Console.WriteLine("No membership included, That will be 15£");
+        }
+        else if (age >= 19 && age <= 60)
+        {
+            if (WantsMemberShip)
+                Console.WriteLine("Membership included, That will be 50£");
+            else
+                Console.WriteLine("No membership included, That will be 15£");
+        }
+        else if (age > 60)
+        {
+            if (WantsMemberShip)
+                Console.WriteLine("Membership included, That will be 35£");
+            else
+                Console.WriteLine("No membership included, that will be 20£");
+        }
+    }
+}
+
+
+
+/////////////////-----------------------///////////
+/////////////////-----------------------///////////
+
+
+
+public class Program
+{
+    public static void Main()
+    {
+        {
+            DataProgram(); //the method
+        }
+
+        static void DataProgram()
+        {
+            Console.WriteLine("Enter your data usage (in GB): ");
+            double dataUsage = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Do you want international calling (yes/no): ");
+            string intlCallinginput = Console.ReadLine();
+            bool wantsInternationalCalling = intlCallinginput.ToLower() == "yes";
+
+            string plan = "";
+            switch (dataUsage)
+            {
+                case 2:
+                    plan = "Basic Plan";
+                    Console.WriteLine("You're choosing Basic Plan.");
+                    break;
+
+                case 5:
+                    plan = "Standart Plan";
+                    Console.WriteLine("You're choosing standart Plan.");
+                    break;
+
+                case 10:
+                    if (wantsInternationalCalling)
+                    {
+                        plan = "Premium Plan";
+                        Console.WriteLine(
+                            "You're choosing the premium plan with International Calling."
+                        );
+                    }
+                    else
+                    {
+                        plan = "Standart Plan";
+                        Console.WriteLine("You're choosing the Standart Plan.");
+                    }
+                    break;
+                case -1:
+                    plan = "Unlimited Plan";
+                    Console.WriteLine(
+                        "You're choosing the unlimited plan with international Calling."
+                    );
+                    break;
+
+                default:
+                    Console.WriteLine("invalid data request.");
+                    break;
+            }
+        }
+    }
+}
+
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+{
+        TicketProgram();
+    }
+
+    static void TicketProgram()
+    {
+        // Step 1: Prompt the user for input
+        Console.WriteLine("Enter your income:");
+
+        double income = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Are you a resident? (yes/no):");
+
+        string residentInput = Console.ReadLine();
+
+        bool isResident = residentInput.ToLower() == "yes";
+
+        double taxRate = 0;
+
+        double tax;
+
+        {
+            Console.WriteLine("you're beatiful");
+        }
+
+        // Step 2: Use advanced if-else statements to calculate tax
+        if (income < 50000)
+        {
+            if (isResident)
+            {
+                taxRate = 0.10; // 10% tax for residents
+            }
+            else
+            {
+                taxRate = 0.15; // 15% tax for non-residents
+            }
+        }
+        else if (income >= 50000 && income <= 100000)
+        {
+            if (isResident)
+            {
+                taxRate = 0.20; // 20% tax for residents
+            }
+            else
+            {
+                taxRate = 0.25; // 25% tax for non-residents
+            }
+        }
+        else
+        {
+            if (isResident)
+            {
+                taxRate = 0.30; // 30% tax for residents
+            }
+            else
+            {
+                taxRate = 0.35; // 35% tax for non-residents
+            }
+        }
+        tax = income * taxRate;
+
+        Console.WriteLine(tax);
+
+        if (tax < 150000)
+        {
+            TicketProgram();
+        }
+    }
+}{
+        TicketProgram();
+    }
+
+    static void TicketProgram()
+    {
+        // Step 1: Prompt the user for input
+        Console.WriteLine("Enter your income:");
+
+        double income = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Are you a resident? (yes/no):");
+
+        string residentInput = Console.ReadLine();
+
+        bool isResident = residentInput.ToLower() == "yes";
+
+        double taxRate = 0;
+
+        double tax;
+
+        {
+            Console.WriteLine("you're beatiful");
+        }
+
+        // Step 2: Use advanced if-else statements to calculate tax
+        if (income < 50000)
+        {
+            if (isResident)
+            {
+                taxRate = 0.10; // 10% tax for residents
+            }
+            else
+            {
+                taxRate = 0.15; // 15% tax for non-residents
+            }
+        }
+        else if (income >= 50000 && income <= 100000)
+        {
+            if (isResident)
+            {
+                taxRate = 0.20; // 20% tax for residents
+            }
+            else
+            {
+                taxRate = 0.25; // 25% tax for non-residents
+            }
+        }
+        else
+        {
+            if (isResident)
+            {
+                taxRate = 0.30; // 30% tax for residents
+            }
+            else
+            {
+                taxRate = 0.35; // 35% tax for non-residents
+            }
+        }
+        tax = income * taxRate;
+
+        Console.WriteLine(tax);
+
+        if (tax < 150000)
+        {
+            TicketProgram();
+        }
+    }
+}
+
+
+////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+public class Program 
+{
+    public static void Main()
+    {
+        {
+            TicketProgram();
+
+        }
+
+        static void TicketProgram()
+        {
+            
+        
+        int age;
+        Console.WriteLine("Enter your age: ");
+        age = int.Parse(Console.ReadLine());
+
+if(age <12)
+{
+    Console.WriteLine("Half Price Ticket");
+}
+else if (age <=65)
+        {
+            Console.WriteLine("Full Price Ticket");
+        }
+        else
+        {
+            Console.WriteLine("Senior discount ticket");
+        }
+        }
+  }
+}
+
+
+
+
+
+/////////////////////////////////////////////////////
+///////////////////////////////////////////////////
+
+
+int age;
+Console.WriteLine("Please enter your age: ");
+age = int.Parse(Console.ReadLine());
+if (age >= 18)
+{
+Console.WriteLine("You're Eligible to vote.");
+} else {
+    Console.WriteLine("You're not eligible to vote");
+}
+
+
+
+/////////////////////////////////////////////
+///////////////////////////////////////////
+using System.Runtime.InteropServices;
+
+int scores;
+Console.WriteLine("Enter your Score: ");
+scores = int.Parse(Console.ReadLine());
+switch (scores / 10)
+{
+    case 10:
+    Console.WriteLine("A");
+    break;
+    case 9:
+    Console.WriteLine("A");
+    break;
+    case 8:
+    Console.WriteLine("B");
+    break;
+    case 7:
+    Console.WriteLine("C");
+    break;
+    case 6:
+    Console.WriteLine("D");
+    break;
+   default:
+   Console.WriteLine("F");
+   break;
+
+}
+
+
+////////////////////////////////////////////
+////////////////////////////////////////////
+int grade;
+Console.WriteLine("Enter the student's grade: ");
+grade = int.Parse(Console.ReadLine());
+if (grade >= 50)
+{
+Console.WriteLine("Passed");
+}
+
+else
+{
+    Console.WriteLine("Failed");
+}
+
+
+
+////////////////////////////////////////
+//////////////////////////////////////
+// See https://aka.ms/new-console-template for more information
+int age;
+Console.WriteLine("Enter your age: ");
+age = int.Parse(Console.ReadLine());
+if (age >=18)
+{
+    Console.WriteLine("You can join");
+    }
+else
+{
+    Console.WriteLine("You cant join.");
+}
+
+/////////////////////////
+/////////////////////////
+
+
+
+string button;
+button = (Console.ReadLine());
+switch (button)
+{
+    case "Water":
+    Console.WriteLine("Dispensing Water");
+    break;
+    case "Soda":
+    Console.WriteLine("Dispensing Soda");
+    break;
+    case "Coffee":
+    Console.WriteLine("Dispensing Coffee");
+    break;
+    default:
+    Console.WriteLine("Invalid Option");
+    break;
+}
+
+
+////////////////////////////////////////
+///////////////////////////////////////
