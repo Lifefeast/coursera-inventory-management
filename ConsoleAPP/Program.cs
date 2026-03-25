@@ -25,13 +25,13 @@ public class InventoryManager
 
     static void Main(string[] args)
     {
-        while (true)
+        while (true) //lopp that is always true, unless user inputs "4"
         {
             Console.WriteLine("Inventory Manager");
-            Console.WriteLine("1. Add item");
-            Console.WriteLine("2. Update existing item");
+            Console.WriteLine("1. Add an item");
+            Console.WriteLine("2. Update or Remove an existing item");
             Console.WriteLine("3. View all items");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine("4. Exit program");
             string? choice = Console.ReadLine();
 
             switch (choice)
@@ -44,9 +44,10 @@ public class InventoryManager
                     break;
                 case "3":
                     ViewItem();
+                    Console.WriteLine($"Total inventory value: £{CalculateInventoryValue():0.00}");
                     break;
                 case "4":
-                    Environment.Exit(0);
+                    Environment.Exit(0); // The only real way to exit the app
                     return;
                 default:
                     Console.WriteLine("Invalid Choice");
@@ -58,51 +59,59 @@ public class InventoryManager
     static void AddItem()
     {
         Console.WriteLine("Enter the Item name:");
-        string productName = Console.ReadLine() ?? ""; //Creating the variable that will hold the name
+        string productName = (Console.ReadLine() ?? "").Trim(); //variable that will hold the name, ignoring spaces. for this method.
         itemName.Add(productName);
-        Console.WriteLine("Enter the quantity for " + productName + ":");
-        double productQuantity;
+        Console.WriteLine("Enter the quantity for '" + productName + "':");
+        double productQuantity; //Variable for quantity for this method
         while (!double.TryParse(Console.ReadLine(), out productQuantity))
         {
             Console.WriteLine("Invalid number, please enter quantity: ");
         }
         itemQuantity.Add(productQuantity);
-        Console.WriteLine("Enter unit price " + productName + ": ");
-        double productPrice;
-        while (!double.TryParse(Console.ReadLine(), out productPrice))
+        Console.WriteLine("Enter unit price for '" + productName + "':");
+        double productPrice; //variable that hold the price for this method.
+        while (!double.TryParse(Console.ReadLine(), out productPrice)) // incase the input is wrong, it will prompt the user again.
         {
             Console.WriteLine("Invalid number, please enter price again: ");
         }
         itemPrice.Add(productPrice);
+        Console.WriteLine($"Item '{productName}' has been added to the inventory.");
     }
 
     static void UpdateItem()
     {
+        ViewItem(); //printing all items before choosing option. for easier selection
         if (itemName.Count == 0)
         {
             Console.WriteLine("Inventory is empty, please add an item!");
             return;
         }
-        Console.WriteLine("Please enter the item number to continue: ");
+        Console.WriteLine(
+            "Please enter existing item number to continue OR anything else to go back to main menu."
+        );
         if (
             int.TryParse(Console.ReadLine(), out int productNumber)
             && productNumber > 0
             && productNumber <= itemName.Count
         )
         {
-            Console.WriteLine("Did you buy or sell: " + itemName[productNumber - 1]);
-            Console.WriteLine("1. Bought more");
-            Console.WriteLine("2. Sold");
+            Console.WriteLine("Choose an option for: " + itemName[productNumber - 1]);
+            Console.WriteLine("1. Add more to stock");
+            Console.WriteLine("2. Reduce from stock");
+            Console.WriteLine("3. Delete the item from inventory");
+            Console.WriteLine("4. Go back");
             int updateChoice;
             while (
                 !int.TryParse(Console.ReadLine(), out updateChoice)
                 || updateChoice < 1
-                || updateChoice > 2
+                || updateChoice > 4
             )
             {
                 Console.WriteLine("Invalid selection");
-                Console.WriteLine("1. Bought more");
-                Console.WriteLine("2. Sold");
+                Console.WriteLine("1. Add more to stock");
+                Console.WriteLine("2. Reduce from stock");
+                Console.WriteLine("3. Delete the item from inventory");
+                Console.WriteLine("4. Go back");
             }
             switch (updateChoice)
             {
@@ -115,10 +124,11 @@ public class InventoryManager
                     }
                     itemQuantity[productNumber - 1] += boughtItem;
                     Console.WriteLine(
-                        "Updated quantity for ("
+                        "Updated quantity for '"
                             + itemName[productNumber - 1]
-                            + "): "
+                            + "' : "
                             + itemQuantity[productNumber - 1]
+                            + "x"
                     );
                     break;
                 case 2:
@@ -140,12 +150,46 @@ public class InventoryManager
                     }
                     itemQuantity[productNumber - 1] -= soldItem;
                     Console.WriteLine(
-                        "Updated quantity for ("
+                        "Updated quantity for '"
                             + itemName[productNumber - 1]
-                            + "): "
+                            + "': "
                             + itemQuantity[productNumber - 1]
+                            + "x"
                     );
                     break;
+
+                case 3:
+                    Console.WriteLine(
+                        "Are you sure you want to remove: '"
+                            + itemName[productNumber - 1]
+                            + "' from the inventory?"
+                            + " Type 'yes' or 'no' "
+                    );
+                    string? input = Console.ReadLine()?.Trim().ToLower();
+
+                    if (input == "yes")
+                    {
+                        string removedItem = itemName[productNumber - 1];
+                        itemName.RemoveAt(productNumber - 1);
+                        itemQuantity.RemoveAt(productNumber - 1);
+                        itemPrice.RemoveAt(productNumber - 1);
+                        Console.WriteLine(
+                            $"Item {productNumber}. '{removedItem}'is removed sucessfuly!"
+                        );
+                    }
+                    else if (input == "no")
+                    {
+                        Console.WriteLine(
+                            $"Item '{itemName[productNumber - 1]}' was NOT removed from the inventory!"
+                        );
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid selection, returned to main menu");
+                    }
+                    break;
+                case 4:
+                    return;
 
                 default:
                     Console.WriteLine("invalid Selection");
@@ -167,8 +211,18 @@ public class InventoryManager
             int displayNumber = i + 1;
             double totalValue = itemQuantity[i] * itemPrice[i];
             Console.WriteLine(
-                $"{displayNumber}. {itemName[i]} - {itemQuantity[i]}x - Unit price: £{itemPrice[i]:0.00}  // Total Price: £{totalValue:0.00}"
+                $"{displayNumber}. {itemName[i]} - Quantity: {itemQuantity[i]}x - Unit price: £{itemPrice[i]:0.00}  // Total Value: £{totalValue:0.00}"
             );
         }
+    }
+
+    static double CalculateInventoryValue()
+    {
+        double totalValue = 0;
+        for (int i = 0; i < itemName.Count; i++)
+        {
+            totalValue += itemQuantity[i] * itemPrice[i];
+        }
+        return totalValue;
     }
 }
