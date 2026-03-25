@@ -1,8 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO.Compression;
-using System.Net.Http.Headers;
-using System.Security.Cryptography.X509Certificates;
 
 /*
  This Inventory system should allow users to efficiently manage product stock.
