@@ -4,19 +4,11 @@ using System.IO.Compression;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 
-/* Inventory management system
-
-To complete this challenge, you will need to create a console application where users can manage product stock. Users should be able to add new products, update stock, and remove products.
-
-Some key features include:
-
-Add new products with name, price, and stock quantity.
-
-Update stock when products are sold or restocked.
-
-View all products and their stock levels.
-
-Remove products from inventory. */
+/*
+ This Inventory system should allow users to efficiently manage product stock.
+ Users can add items to inventory with specified quantity and price, update the quantity of an existing stock or remove items entirely.
+ The system also provides a way to view the full inventory, showing each item's quantity, price and total value. as well as the combined total value of all items in stock.
+ */
 public class InventoryManager
 {
     static List<string> itemName = new List<string>();
